@@ -46,6 +46,7 @@ const updateWithRating = async (
     numRatings: newNumRatings,
     sumRating: newSumRating,
     avgRating: newAverage,
+    lastReviewUserID: review.userId,
   });
 
   transaction.set(newRatingDocument, {
