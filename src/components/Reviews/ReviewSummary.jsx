@@ -15,9 +15,9 @@ export async function GeminiSummary({ restaurantId }) {
   const reviewSeparator = "@";
   // The separator keeps each review distinct inside a single prompt.
   const prompt = `
-    Based on the following restaurant reviews, 
+    Based on the following MMO reviews, 
     where each review is separated by a '${reviewSeparator}' character, 
-    create a one-sentence summary of what people think of the restaurant. 
+    create a one-sentence summary of what people think of the game. 
 
     Here are the reviews: ${reviews.map((review) => review.text).join(reviewSeparator)}
   `;

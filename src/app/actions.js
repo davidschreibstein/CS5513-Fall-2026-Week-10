@@ -6,15 +6,13 @@ import { getFirestore } from "firebase/firestore";
 
 // This is a Server Action
 export async function handleReviewFormSubmission(data) {
-    const { firebaseServerApp } = await getAuthenticatedAppForUser();
+    const { firebaseServerApp, currentUser } = await getAuthenticatedAppForUser();
     const db = getFirestore(firebaseServerApp);
   
     await addReviewToRestaurant(db, data.get("restaurantId"), {
       text: data.get("text"),
       rating: data.get("rating"),
-  
-      // This came from a hidden form field.
-      userId: data.get("userId"),
+      userId: currentUser.uid,
     });
   }
   

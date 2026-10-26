@@ -48,8 +48,8 @@ export default function Header({ initialUser }) {
   return (
     <header>
       <Link href="/" className="logo">
-        <img src="/friendly-eats.svg" alt="FriendlyEats" />
-        Friendly Eats
+        <img src="/friendly-eats.svg" alt="Best MMOs" />
+        Best MMOs
       </Link>
       {user ? (
         <>
@@ -70,7 +70,7 @@ export default function Header({ initialUser }) {
 
                 <li>
                   <a href="#" onClick={addFakeRestaurantsAndReviews}>
-                    Add sample restaurants
+                    Add sample MMOs
                   </a>
                 </li>
 

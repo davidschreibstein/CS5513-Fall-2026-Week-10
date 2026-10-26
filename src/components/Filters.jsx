@@ -38,7 +38,7 @@ export default function Filters({ filters, setFilters }) {
         <summary>
           <img src="/filter.svg" alt="filter" />
           <div>
-            <p>Restaurants</p>
+            <p>MMOs</p>
             <p>Sorted by {filters.sort || "Rating"}</p>
           </div>
         </summary>
@@ -51,22 +51,13 @@ export default function Filters({ filters, setFilters }) {
           }}
         >
           <FilterSelect
-            label="Category"
+            label="Genre"
             options={[
               "",
-              "Italian",
-              "Chinese",
-              "Japanese",
-              "Mexican",
-              "Indian",
-              "Mediterranean",
-              "Caribbean",
-              "Cajun",
-              "German",
-              "Russian",
-              "Cuban",
-              "Organic",
-              "Tapas",
+              "Sandbox MMORPG",
+              "Theme Park MMORPG",
+              "Classic MMORPG",
+              "Sandbox PvP",
             ]}
             value={filters.category}
             onChange={(event) => handleSelectionChange(event, "category")}
@@ -75,21 +66,8 @@ export default function Filters({ filters, setFilters }) {
           />
 
           <FilterSelect
-            label="City"
-            options={[
-              "",
-              "New York",
-              "Los Angeles",
-              "London",
-              "Paris",
-              "Tokyo",
-              "Mumbai",
-              "Dubai",
-              "Amsterdam",
-              "Seoul",
-              "Singapore",
-              "Istanbul",
-            ]}
+            label="Platform"
+            options={["", "PC", "PC & Mobile", "Cross-platform"]}
             value={filters.city}
             onChange={(event) => handleSelectionChange(event, "city")}
             name="city"
@@ -97,7 +75,7 @@ export default function Filters({ filters, setFilters }) {
           />
 
           <FilterSelect
-            label="Price"
+            label="Cost"
             options={["", "$", "$$", "$$$", "$$$$"]}
             value={filters.price}
             onChange={(event) => handleSelectionChange(event, "price")}
