@@ -23,11 +23,15 @@ export async function GeminiSummary({ restaurantId }) {
   `;
 
   try {
-    // Route through Vertex AI (App Hosting service account / ADC — no Gemini API key).
-    // gemini-3.5-flash uses the global endpoint, not regional ones like us-central1.
+    // Prefer Vertex Express Mode with GEMINI_API_KEY (set in App Hosting secrets).
+    // Fall back to ADC on App Hosting if no key is present.
     const ai = genkit({
-      plugins: [vertexAI({ location: "global" })],
-      model: vertexAI.model("gemini-3.5-flash"),
+      plugins: [
+        process.env.GEMINI_API_KEY
+          ? vertexAI({ apiKey: process.env.GEMINI_API_KEY })
+          : vertexAI({ location: "global" }),
+      ],
+      model: vertexAI.model("gemini-2.5-flash"),
     });
     const { text } = await ai.generate(prompt);
 
