@@ -23,7 +23,7 @@ export async function updateRestaurantImageReference(
   restaurantId,
   publicImageUrl
 ) {
-  const restaurantRef = doc(collection(db, "restaurants"), restaurantId);
+  const restaurantRef = doc(collection(db, "mmos"), restaurantId);
   if (restaurantRef) {
     await updateDoc(restaurantRef, { photo: publicImageUrl });
   }
@@ -66,9 +66,9 @@ export async function addReviewToRestaurant(db, restaurantId, review) {
   }
 
   try {
-    const docRef = doc(collection(db, "restaurants"), restaurantId);
+    const docRef = doc(collection(db, "mmos"), restaurantId);
     const newRatingDocument = doc(
-      collection(db, `restaurants/${restaurantId}/ratings`),
+      collection(db, `mmos/${restaurantId}/ratings`),
     );
 
     // corrected line
@@ -106,7 +106,7 @@ function applyQueryFilters(q, { category, city, price, sort }) {
 
 // One-time read of restaurants matching the listing filters.
 export async function getRestaurants(db = db, filters = {}) {
-  let q = query(collection(db, "restaurants"));
+  let q = query(collection(db, "mmos"));
 
   q = applyQueryFilters(q, filters);
   const results = await getDocs(q);
@@ -127,7 +127,7 @@ export function getRestaurantsSnapshot(cb, filters = {}) {
     return;
   }
 
-  let q = query(collection(db, "restaurants"));
+  let q = query(collection(db, "mmos"));
   q = applyQueryFilters(q, filters);
 
   return onSnapshot(q, (querySnapshot) => {
@@ -150,7 +150,7 @@ export async function getRestaurantById(db, restaurantId) {
     console.log("Error: Invalid ID received: ", restaurantId);
     return;
   }
-  const docRef = doc(db, "restaurants", restaurantId);
+  const docRef = doc(db, "mmos", restaurantId);
   const docSnap = await getDoc(docRef);
   return {
     ...docSnap.data(),
@@ -170,7 +170,7 @@ export function getRestaurantSnapshotById(restaurantId, cb) {
     return;
   }
 
-  const docRef = doc(db, "restaurants", restaurantId);
+  const docRef = doc(db, "mmos", restaurantId);
   return onSnapshot(docRef, (docSnap) => {
     cb({
       ...docSnap.data(),
@@ -187,7 +187,7 @@ export async function getReviewsByRestaurantId(db, restaurantId) {
   }
 
   const q = query(
-    collection(db, "restaurants", restaurantId, "ratings"),
+    collection(db, "mmos", restaurantId, "ratings"),
     orderBy("timestamp", "desc")
   );
 
@@ -210,7 +210,7 @@ export function getReviewsSnapshotByRestaurantId(restaurantId, cb) {
   }
 
   const q = query(
-    collection(db, "restaurants", restaurantId, "ratings"),
+    collection(db, "mmos", restaurantId, "ratings"),
     orderBy("timestamp", "desc")
   );
   return onSnapshot(q, (querySnapshot) => {
@@ -232,13 +232,13 @@ export async function addFakeRestaurantsAndReviews() {
   for (const { restaurantData, ratingsData } of data) {
     try {
       const docRef = await addDoc(
-        collection(db, "restaurants"),
+        collection(db, "mmos"),
         restaurantData
       );
 
       for (const ratingData of ratingsData) {
         await addDoc(
-          collection(db, "restaurants", docRef.id, "ratings"),
+          collection(db, "mmos", docRef.id, "ratings"),
           ratingData
         );
       }
