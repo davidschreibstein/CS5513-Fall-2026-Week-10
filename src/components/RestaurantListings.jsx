@@ -85,7 +85,7 @@ export default function RestaurantListings({
   return (
     <article>
       <Filters filters={filters} setFilters={setFilters} />
-      <ul className="restaurants">
+      <ul className="mmos">
         {restaurants.map((restaurant) => (
           <RestaurantItem key={restaurant.id} restaurant={restaurant} />
         ))}

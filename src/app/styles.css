@@ -250,7 +250,7 @@ article {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
-.restaurants {
+.mmos {
   display: grid;
   margin: 20px auto 0;
   width: min(1100px, calc(100% - 2rem));
