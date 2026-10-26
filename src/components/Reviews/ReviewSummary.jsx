@@ -23,14 +23,10 @@ export async function GeminiSummary({ restaurantId }) {
   `;
 
   try {
-    // Prefer Vertex Express Mode with GEMINI_API_KEY (set in App Hosting secrets).
-    // Fall back to ADC on App Hosting if no key is present.
+    // Vertex AI via App Hosting ADC. Needs roles/aiplatform.user on the
+    // firebase-app-hosting-compute service account.
     const ai = genkit({
-      plugins: [
-        process.env.GEMINI_API_KEY
-          ? vertexAI({ apiKey: process.env.GEMINI_API_KEY })
-          : vertexAI({ location: "global" }),
-      ],
+      plugins: [vertexAI({ location: "global" })],
       model: vertexAI.model("gemini-2.5-flash"),
     });
     const { text } = await ai.generate(prompt);
