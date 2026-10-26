@@ -39,7 +39,12 @@ export async function GeminiSummary({ restaurantId }) {
     );
   } catch (e) {
     console.error(e);
-    return <p>Error summarizing reviews.</p>;
+    return (
+      <p>
+        Error summarizing reviews.{" "}
+        <span style={{ opacity: 0.7 }}>({e?.message || String(e)})</span>
+      </p>
+    );
   }
 }
 
