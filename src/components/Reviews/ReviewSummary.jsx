@@ -27,7 +27,7 @@ export async function GeminiSummary({ restaurantId }) {
     // firebase-app-hosting-compute service account.
     const ai = genkit({
       plugins: [vertexAI({ location: "global" })],
-      model: vertexAI.model("gemini-2.5-flash"),
+      model: vertexAI.model("gemini-3.5-flash"),
     });
     const { text } = await ai.generate(prompt);
 
